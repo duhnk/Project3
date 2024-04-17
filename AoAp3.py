@@ -33,7 +33,7 @@ def find_subwords(word, word_set, memo=None):
             suffix_subwords = find_subwords(suffix, word_set, memo)
             # If subwords are found in the suffix, combine them with the prefix
             if suffix_subwords:
-                current_subwords = [prefix] + suffix_subwords
+                current_subwords = [prefix] + list(suffix_subwords)
                 # If this is the first combination found or smaller than the previous one, update the smallest set
                 if not smallest_subwords or len(current_subwords) < len(smallest_subwords):
                     smallest_subwords = current_subwords
