@@ -4,11 +4,11 @@ def read_txt_to_list(filename):
   try:
     with open(filename, 'r') as file:
       # Read lines and strip whitespaces
-      data_set = {line.strip() for line in file}
+      data_set = [line.strip() for line in file]
       return data_set
   except FileNotFoundError:
     print(f"Error: File '{filename}' not found.")
-    return set()  # Return an empty set
+    return []  # Return list
 
 def find_subwords(word, word_set, memo=None):
     if memo is None:
@@ -33,7 +33,7 @@ def find_subwords(word, word_set, memo=None):
             suffix_subwords = find_subwords(suffix, word_set, memo)
             # If subwords are found in the suffix, combine them with the prefix
             if suffix_subwords:
-                current_subwords = {prefix} | suffix_subwords
+                current_subwords = [prefix] + suffix_subwords
                 # If this is the first combination found or smaller than the previous one, update the smallest set
                 if not smallest_subwords or len(current_subwords) < len(smallest_subwords):
                     smallest_subwords = current_subwords
@@ -58,7 +58,7 @@ def main():
         cttData = csv.DictReader(inputFile)
         data=set()
                 # Example usage
-        filename = "input1.txt"
+        filename = "input.txt"
         data_list = read_txt_to_list(filename)
 
         if data_list:
